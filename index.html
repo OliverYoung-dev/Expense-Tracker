@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expense Tracker Application</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Expense Tracker Application</h1>
+        </div>
+        <div class="content">
+            <h2>Welcome to Your Expense Tracker</h2>
+            <p>Manage your expenses effectively and efficiently.</p>
+            <img src="img/expense.jpg" alt="Expense Tracker Image">
+            <h3>Registration Form</h3>
+            <form action="#" method="POST" id="registrationForm">
+                <div class="form-control">
+                    <label for="name">Name <small style="color: red;">*</small></label>
+                    <input type="text" id="name" name="name" placeholder="Enter Your full name" required title="Enter Your Full Name">
+                </div>
+                <div class="form-control">
+                    <label for="email">Email Address <small style="color: red;">*</small></label>
+                    <input type="email" id="email" placeholder="Enter your Email" name="email" pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}" title="Please enter a valid email" required>
+                </div>
+                <div class="form-control">
+                    <label for="phone">Phone Number <small style="color: red;">*</small></label>
+                    <input type="tel" id="phone" name="phone" placeholder="Enter your phone number" pattern="[0-9]{10}" title="Please enter 10 digits" required>
+                </div>
+                <div class="form-control">
+                    <label for="password">Password <small style="color: red;">*</small></label>
+                    <input type="password" id="password" name="password" placeholder="Enter your password" required minlength="6" title="Minimum length should be 6 characters">
+                </div>
+                <div class="form-control">
+                    <label for="confirm_password">Confirm Password <small style="color: red;">*</small></label>
+                    <input type="password" id="confirm_password" name="confirm_password" placeholder="Confirm your password" required minlength="6" title="Minimum length should be 6 characters" onchange="validatePassword()">
+                    <small id="password_message" style="color: red;"></small>
+                </div>
+                <div class="form-control">
+                    <input type="submit" value="Register">
+                </div>
+            </form>
+            <h3>User Information</h3>
+            <table id="userTable">
+                <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Phone Number</th>
+                </tr>
+                <tr>
+                    <td>Oliver Otieno</td>
+                    <td>Oliver@gmail.com</td>
+                    <td>0795521106</td>
+                </tr>
+                <!-- Additional user rows can be added here -->
+            </table>
+            <div class="external-link">
+                <p>For more information, visit <a href="https://google.com" target="_blank">Google</a>.</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var table = document.getElementById('userTable');
+            var form = document.getElementById('registrationForm');
+
+            // Add event listener to each row in the table
+            var rows = table.getElementsByTagName('tr');
+            for (var i = 1; i < rows.length; i++) { // Start from index 1 to skip header row
+                rows[i].addEventListener('click', function() {
+                    var cells = this.getElementsByTagName('td');
+                    var name = cells[0].textContent;
+                    var email = cells[1].textContent;
+                    var phone = cells[2].textContent;
+
+                    // Fill form fields with data from clicked row
+                    document.getElementById('name').value = name;
+                    document.getElementById('email').value = email;
+                    document.getElementById('phone').value = phone;
+                });
+            }
+        });
+
+        function validatePassword() {
+            var password = document.getElementById("password").value;
+            var confirm_password = document.getElementById("confirm_password").value;
+            var password_message = document.getElementById("password_message");
+
+            if (password != confirm_password) {
+                password_message.textContent = "Passwords do not match";
+            } else {
+                password_message.textContent = "";
+            }
+        }
+    </script>
+</body>
+</html>
